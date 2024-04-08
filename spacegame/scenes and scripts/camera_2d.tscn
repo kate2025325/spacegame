@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://de8nomw8v04or"]
+
+[ext_resource type="Script" path="res://scenes and scripts/cam.gd" id="1_06yhx"]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2(960, 540)
+scale = Vector2(2, 2)
+script = ExtResource("1_06yhx")
+metadata/_edit_lock_ = true

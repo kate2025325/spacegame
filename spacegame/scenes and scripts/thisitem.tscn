@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://bakqkoure4xto"]
+
+[ext_resource type="Script" path="res://scenes and scripts/item.gd" id="1_31r4r"]
+[ext_resource type="Texture2D" uid="uid://bap0silmqd3fd" path="res://images/11png.png" id="2_sndpu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fh0wl"]
+size = Vector2(100, 100)
+
+[node name="item" type="CharacterBody2D"]
+z_index = 15
+position = Vector2(751, 346)
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_31r4r")
+
+[node name="texture" type="TextureRect" parent="."]
+z_index = 9
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sndpu")
+metadata/id = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fh0wl")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

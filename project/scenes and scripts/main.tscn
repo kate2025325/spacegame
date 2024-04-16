@@ -1,0 +1,749 @@
+[gd_scene load_steps=27 format=3 uid="uid://c8fx7qnw2kc7d"]
+
+[ext_resource type="PackedScene" uid="uid://b78ylew74y44e" path="res://scenes and scripts/player.tscn" id="2_e1whh"]
+[ext_resource type="Texture2D" uid="uid://bap0silmqd3fd" path="res://resources/11png.png" id="2_thf6k"]
+[ext_resource type="Script" path="res://scenes and scripts/npc.gd" id="3_cr10d"]
+[ext_resource type="Texture2D" uid="uid://bjykmfwedfp04" path="res://resources/NPC.png" id="3_ma5x0"]
+[ext_resource type="Script" path="res://scenes and scripts/cam2.gd" id="3_pblgd"]
+[ext_resource type="PackedScene" uid="uid://bakqkoure4xto" path="res://scenes and scripts/thisitem.tscn" id="4_j4wws"]
+[ext_resource type="Script" path="res://scenes and scripts/roomarea.gd" id="4_qr1ij"]
+[ext_resource type="Script" path="res://scenes and scripts/dialogue.gd" id="5_7vhgh"]
+[ext_resource type="Script" path="res://scenes and scripts/item.gd" id="7_mw6qt"]
+[ext_resource type="Texture2D" uid="uid://cfgf11o0hsemk" path="res://resources/wrench.png" id="8_i0p6w"]
+[ext_resource type="Texture2D" uid="uid://0pb4ewlq677q" path="res://resources/manual.png" id="9_u2cfw"]
+[ext_resource type="Script" path="res://scenes and scripts/space.gd" id="9_v0p6n"]
+[ext_resource type="Texture2D" uid="uid://6fiemh4vjh7m" path="res://resources/starrysky.png" id="9_vhaay"]
+[ext_resource type="AudioStream" uid="uid://bqc57nubd2pkc" path="res://resources/music.wav" id="14_sgvbr"]
+[ext_resource type="Script" path="res://scenes and scripts/music.gd" id="15_8k8de"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_es83t"]
+size = Vector2(1920, 100)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_01762"]
+normal = Vector2(1, 2.08165e-12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl3yt"]
+size = Vector2(1920, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdqhc"]
+size = Vector2(400, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fh0wl"]
+size = Vector2(100, 100)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xop5c"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sgl6i"]
+normal = Vector2(-1, 2.08165e-12)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c8qao"]
+normal = Vector2(2.08165e-12, -1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5tho7"]
+normal = Vector2(2.08165e-12, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5j4sx"]
+bg_color = Color(0.0823529, 0.133333, 0.211765, 0.803922)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+
+[sub_resource type="Theme" id="Theme_qqv23"]
+Panel/styles/panel = SubResource("StyleBoxFlat_5j4sx")
+
+[node name="main" type="Node2D"]
+
+[node name="roomnode" type="Node2D" parent="."]
+
+[node name="main room" type="Node2D" parent="roomnode"]
+
+[node name="floor" type="StaticBody2D" parent="roomnode/main room"]
+collision_layer = 4
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="roomnode/main room/floor"]
+position = Vector2(6720, 1030)
+shape = SubResource("RectangleShape2D_es83t")
+
+[node name="wall" type="StaticBody2D" parent="roomnode/main room"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/main room/wall"]
+position = Vector2(2.08165e-12, 980)
+shape = SubResource("WorldBoundaryShape2D_01762")
+
+[node name="Control" type="Control" parent="roomnode/main room"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="background" type="TextureRect" parent="roomnode/main room/Control"]
+modulate = Color(0.203922, 0.298039, 0.423529, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="floor" type="TextureRect" parent="roomnode/main room/Control"]
+modulate = Color(0.160784, 0.2, 0.25098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 980.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="npc" type="CharacterBody2D" parent="roomnode/main room"]
+position = Vector2(1200, 880)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("3_cr10d")
+
+[node name="TextureRect" type="TextureRect" parent="roomnode/main room/npc"]
+visible = false
+modulate = Color(1, 0.85098, 0, 1)
+z_index = 9
+offset_left = -75.0
+offset_top = -100.0
+offset_right = 75.0
+offset_bottom = 100.0
+texture = ExtResource("2_thf6k")
+
+[node name="Control" type="Control" parent="roomnode/main room/npc"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -220.0
+offset_right = 40.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="chatIcon" type="TextureRect" parent="roomnode/main room/npc/Control"]
+visible = false
+z_index = 9
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="mouseInput" type="Control" parent="roomnode/main room/npc"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -100.0
+offset_right = 75.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="roomnode/main room/npc"]
+texture_filter = 1
+position = Vector2(2.08165e-12, -39)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_ma5x0")
+
+[node name="cam1" type="Camera2D" parent="roomnode/main room" groups=["cams"]]
+position = Vector2(960, 540)
+script = ExtResource("3_pblgd")
+
+[node name="area" type="Area2D" parent="roomnode/main room"]
+visible = false
+position = Vector2(960, 540)
+collision_layer = 16
+script = ExtResource("4_qr1ij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/main room/area"]
+shape = SubResource("RectangleShape2D_jl3yt")
+
+[node name="quarters" type="Node2D" parent="roomnode"]
+position = Vector2(1920, 2.08165e-12)
+
+[node name="floor" type="StaticBody2D" parent="roomnode/quarters"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="roomnode/quarters/floor"]
+position = Vector2(4800, 1030)
+shape = SubResource("RectangleShape2D_es83t")
+
+[node name="platform" type="StaticBody2D" parent="roomnode/quarters"]
+position = Vector2(-229, -114)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/quarters/platform"]
+position = Vector2(1414, 851)
+shape = SubResource("RectangleShape2D_wdqhc")
+
+[node name="background" type="TextureRect" parent="roomnode/quarters/platform/CollisionShape2D"]
+modulate = Color(0.643137, 0.486275, 0.486275, 1)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -10.0
+offset_right = 200.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="platform2" type="StaticBody2D" parent="roomnode/quarters"]
+position = Vector2(252, -314)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/quarters/platform2"]
+position = Vector2(1414, 851)
+shape = SubResource("RectangleShape2D_wdqhc")
+
+[node name="background" type="TextureRect" parent="roomnode/quarters/platform2/CollisionShape2D"]
+modulate = Color(0.643137, 0.486275, 0.486275, 1)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -10.0
+offset_right = 200.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="platform3" type="StaticBody2D" parent="roomnode/quarters"]
+position = Vector2(-813, -484)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/quarters/platform3"]
+position = Vector2(1414, 851)
+shape = SubResource("RectangleShape2D_wdqhc")
+
+[node name="background" type="TextureRect" parent="roomnode/quarters/platform3/CollisionShape2D"]
+modulate = Color(0.643137, 0.486275, 0.486275, 1)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -10.0
+offset_right = 200.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="Control" type="Control" parent="roomnode/quarters"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="background" type="TextureRect" parent="roomnode/quarters/Control"]
+modulate = Color(0.419608, 0.298039, 0.298039, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="floor" type="TextureRect" parent="roomnode/quarters/Control"]
+modulate = Color(0.160784, 0.2, 0.25098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 980.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="item" parent="roomnode/quarters" instance=ExtResource("4_j4wws")]
+position = Vector2(507, 312)
+metadata/enabled = true
+metadata/id = 0
+
+[node name="cam2" type="Camera2D" parent="roomnode/quarters" groups=["cams"]]
+position = Vector2(960, 540)
+enabled = false
+script = ExtResource("3_pblgd")
+
+[node name="area" type="Area2D" parent="roomnode/quarters"]
+visible = false
+position = Vector2(960, 540)
+collision_layer = 16
+script = ExtResource("4_qr1ij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/quarters/area"]
+shape = SubResource("RectangleShape2D_jl3yt")
+
+[node name="lab" type="Node2D" parent="roomnode"]
+position = Vector2(3840, 0)
+
+[node name="floor" type="StaticBody2D" parent="roomnode/lab"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="roomnode/lab/floor"]
+position = Vector2(2880, 1030)
+shape = SubResource("RectangleShape2D_es83t")
+
+[node name="platform2" type="StaticBody2D" parent="roomnode/lab"]
+position = Vector2(-288, -498)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/lab/platform2"]
+position = Vector2(1414, 851)
+shape = SubResource("RectangleShape2D_wdqhc")
+
+[node name="background" type="TextureRect" parent="roomnode/lab/platform2/CollisionShape2D"]
+modulate = Color(0.643137, 0.486275, 0.486275, 1)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -10.0
+offset_right = 200.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="platform3" type="StaticBody2D" parent="roomnode/lab"]
+position = Vector2(-1000, -427)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/lab/platform3"]
+position = Vector2(1414, 851)
+shape = SubResource("RectangleShape2D_wdqhc")
+
+[node name="background" type="TextureRect" parent="roomnode/lab/platform3/CollisionShape2D"]
+modulate = Color(0.643137, 0.486275, 0.486275, 1)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -10.0
+offset_right = 200.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="item" type="CharacterBody2D" parent="roomnode/lab"]
+z_index = 15
+position = Vector2(1196, 295)
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("7_mw6qt")
+metadata/enabled = false
+metadata/id = 1
+
+[node name="texture" type="TextureRect" parent="roomnode/lab/item"]
+z_index = 9
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -49.0
+offset_right = 350.0
+offset_bottom = 351.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.244358, 0.244358)
+texture = ExtResource("8_i0p6w")
+metadata/id = 0
+
+[node name="Area2D" type="Area2D" parent="roomnode/lab/item"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/lab/item/Area2D"]
+shape = SubResource("RectangleShape2D_fh0wl")
+
+[node name="Control" type="Control" parent="roomnode/lab"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="background" type="TextureRect" parent="roomnode/lab/Control"]
+modulate = Color(0.258824, 0.360784, 0.32549, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="floor" type="TextureRect" parent="roomnode/lab/Control"]
+modulate = Color(0.160784, 0.2, 0.25098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 980.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="cam3" type="Camera2D" parent="roomnode/lab" groups=["cams"]]
+position = Vector2(960, 540)
+enabled = false
+script = ExtResource("3_pblgd")
+
+[node name="area" type="Area2D" parent="roomnode/lab"]
+visible = false
+position = Vector2(960, 540)
+collision_layer = 16
+script = ExtResource("4_qr1ij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/lab/area"]
+shape = SubResource("RectangleShape2D_jl3yt")
+
+[node name="airlock" type="Node2D" parent="roomnode"]
+position = Vector2(5760, 2.08165e-12)
+
+[node name="floor" type="StaticBody2D" parent="roomnode/airlock"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/airlock/floor"]
+position = Vector2(960, 1030)
+shape = SubResource("RectangleShape2D_es83t")
+
+[node name="platform4" type="StaticBody2D" parent="roomnode/airlock"]
+position = Vector2(65, -137)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/airlock/platform4"]
+position = Vector2(1414, 851)
+shape = SubResource("RectangleShape2D_wdqhc")
+
+[node name="background" type="TextureRect" parent="roomnode/airlock/platform4/CollisionShape2D"]
+modulate = Color(0.643137, 0.486275, 0.486275, 1)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -10.0
+offset_right = 200.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="Control" type="Control" parent="roomnode/airlock"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="background" type="TextureRect" parent="roomnode/airlock/Control"]
+modulate = Color(0.560784, 0.560784, 0.560784, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="floor" type="TextureRect" parent="roomnode/airlock/Control"]
+modulate = Color(0.160784, 0.2, 0.25098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 980.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="cam4" type="Camera2D" parent="roomnode/airlock" groups=["cams"]]
+position = Vector2(960, 540)
+enabled = false
+script = ExtResource("3_pblgd")
+
+[node name="area" type="Area2D" parent="roomnode/airlock"]
+visible = false
+position = Vector2(960, 540)
+collision_layer = 16
+script = ExtResource("4_qr1ij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/airlock/area"]
+shape = SubResource("RectangleShape2D_jl3yt")
+
+[node name="space" type="Node2D" parent="roomnode"]
+position = Vector2(7680, 2.08165e-12)
+
+[node name="item" type="CharacterBody2D" parent="roomnode/space"]
+z_index = 15
+position = Vector2(1059, 306)
+rotation = 0.527756
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("7_mw6qt")
+metadata/enabled = false
+metadata/id = 2
+
+[node name="texture" type="TextureRect" parent="roomnode/space/item"]
+z_index = 9
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -48.0
+offset_right = 386.0
+offset_bottom = 352.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.244358, 0.244358)
+texture = ExtResource("9_u2cfw")
+metadata/id = 0
+
+[node name="Area2D" type="Area2D" parent="roomnode/space/item"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/space/item/Area2D"]
+shape = SubResource("RectangleShape2D_fh0wl")
+
+[node name="floor" type="StaticBody2D" parent="roomnode/space"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/space/floor"]
+position = Vector2(960, 980)
+shape = SubResource("WorldBoundaryShape2D_xop5c")
+
+[node name="Control" type="Control" parent="roomnode/space"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="background" type="TextureRect" parent="roomnode/space/Control"]
+modulate = Color(0.560784, 0.560784, 0.560784, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_vhaay")
+expand_mode = 5
+
+[node name="floor" type="TextureRect" parent="roomnode/space/Control"]
+visible = false
+modulate = Color(0.160784, 0.2, 0.25098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 980.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_thf6k")
+
+[node name="bounds" type="StaticBody2D" parent="roomnode/space"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/space/bounds"]
+position = Vector2(1920, 980)
+shape = SubResource("WorldBoundaryShape2D_sgl6i")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="roomnode/space/bounds"]
+position = Vector2(1920, 1080)
+shape = SubResource("WorldBoundaryShape2D_c8qao")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="roomnode/space/bounds"]
+position = Vector2(1920, 2.08165e-12)
+shape = SubResource("WorldBoundaryShape2D_5tho7")
+
+[node name="cam4" type="Camera2D" parent="roomnode/space" groups=["cams"]]
+position = Vector2(960, 540)
+enabled = false
+script = ExtResource("3_pblgd")
+
+[node name="area" type="Area2D" parent="roomnode/space"]
+visible = false
+position = Vector2(960, 540)
+collision_layer = 16
+priority = 1
+gravity_space_override = 3
+gravity_point_center = Vector2(2.08165e-12, 2.08165e-12)
+gravity_direction = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("9_v0p6n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="roomnode/space/area"]
+shape = SubResource("RectangleShape2D_jl3yt")
+
+[node name="player" parent="." instance=ExtResource("2_e1whh")]
+position = Vector2(858, 873)
+collision_mask = 4
+
+[node name="gui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="dialogue" type="Control" parent="gui"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("5_7vhgh")
+
+[node name="textpanel" type="Panel" parent="gui/dialogue"]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 160.0
+offset_right = 1760.0
+offset_bottom = 460.0
+mouse_filter = 2
+theme = SubResource("Theme_qqv23")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/dialogue/textpanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="text" type="Label" parent="gui/dialogue/textpanel/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 46
+text = "character dialogue here!"
+autowrap_mode = 3
+
+[node name="nametag" type="Panel" parent="gui/dialogue"]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 72.0
+offset_right = 760.0
+offset_bottom = 172.0
+mouse_filter = 2
+theme = SubResource("Theme_qqv23")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/dialogue/nametag"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="tag" type="Label" parent="gui/dialogue/nametag/MarginContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 46
+text = "character name"
+
+[node name="clickprompt" type="Panel" parent="gui/dialogue"]
+layout_mode = 1
+offset_left = 1079.0
+offset_top = 448.0
+offset_right = 1759.0
+offset_bottom = 548.0
+mouse_filter = 2
+theme = SubResource("Theme_qqv23")
+
+[node name="MarginContainer" type="MarginContainer" parent="gui/dialogue/clickprompt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="note" type="Label" parent="gui/dialogue/clickprompt/MarginContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 46
+text = "(click anywhere to continue)"
+horizontal_alignment = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_sgvbr")
+volume_db = -3.748
+autoplay = true
+script = ExtResource("15_8k8de")
+
+[connection signal="gui_input" from="roomnode/main room/npc/mouseInput" to="roomnode/main room/npc" method="_on_mouse_input_gui_input"]
+[connection signal="mouse_entered" from="roomnode/main room/npc/mouseInput" to="roomnode/main room/npc" method="_on_mouse_input_mouse_entered"]
+[connection signal="mouse_exited" from="roomnode/main room/npc/mouseInput" to="roomnode/main room/npc" method="_on_mouse_input_mouse_exited"]
+[connection signal="body_entered" from="roomnode/main room/area" to="roomnode/main room/area" method="_on_body_entered"]
+[connection signal="body_exited" from="roomnode/main room/area" to="roomnode/main room/area" method="_on_body_exited"]
+[connection signal="body_entered" from="roomnode/quarters/area" to="roomnode/quarters/area" method="_on_body_entered"]
+[connection signal="body_exited" from="roomnode/quarters/area" to="roomnode/quarters/area" method="_on_body_exited"]
+[connection signal="body_entered" from="roomnode/lab/item/Area2D" to="roomnode/lab/item" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="roomnode/lab/area" to="roomnode/lab/area" method="_on_body_entered"]
+[connection signal="body_exited" from="roomnode/lab/area" to="roomnode/lab/area" method="_on_body_exited"]
+[connection signal="body_entered" from="roomnode/airlock/area" to="roomnode/airlock/area" method="_on_body_entered"]
+[connection signal="body_exited" from="roomnode/airlock/area" to="roomnode/airlock/area" method="_on_body_exited"]
+[connection signal="body_entered" from="roomnode/space/item/Area2D" to="roomnode/space/item" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="roomnode/space/area" to="roomnode/space/area" method="_on_body_entered"]
+[connection signal="body_exited" from="roomnode/space/area" to="roomnode/space/area" method="_on_body_exited"]
+[connection signal="gui_input" from="gui/dialogue" to="gui/dialogue" method="_on_gui_input"]
+[connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="_on_finished"]

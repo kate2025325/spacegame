@@ -12,6 +12,8 @@ signal toRight
 signal toLeft
 signal spawnitem(id)
 
+signal checkpos(pos)
+
 var currentItemID = -1
 
 #for events and global variables!

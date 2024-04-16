@@ -1,7 +1,7 @@
 extends Control
 
 
-const npcName = "Astronaut"
+const npcName = "Bob"
 const plrName = "You"
 
 
@@ -18,16 +18,16 @@ var data = [
 	{dialogue =
 		[
 			{tag = npcName,
-			line = "Hello there! this is a test because I don't know what to write"},
+			line = "Hello there, astronaut!"},
 			
 			{tag = plrName,
-			line = "Hi, "+ npcName +". I don't quite know what to say either"},
+			line = "Hi, "+ npcName +". How ya doing?"},
 			
 			{tag = npcName,
-			line = "WELL it looks like YOU need to DO SOMETHING!!! So go find me THIS SPECIFIC ITEM!!!!"},
+			line = "Good until it all turned TERRIBLE!!! I lost my very precious slice of cake!!"},
 			
 			{tag = npcName,
-			line = "You can find THIS SPECIFIC ITEM in the quarters!"},
+			line = "Do you think you could find it for me?? I'd love it!"},
 			
 			{tag = plrName,
 			line = "Uh. Alright, I guess..."},
@@ -41,19 +41,19 @@ var data = [
 {dialogue =
 		[
 			{tag = npcName,
-			line = "Hey! You found it! Nice job."},
+			line = "Hey! You found it! YAYYYY!!!"},
 			
 			{tag = npcName,
 			line = "You're pretty good at this, huh?"},
 			
 			{tag = npcName,
-			line = "Howzabout you help me find some of my tools?"},
+			line = "Howzabout you help me find my wrench?"},
 			
 			{tag = plrName,
 			line = "What's in it for me?"},
 			
 			{tag = npcName,
-			line = "I mean. Without them, I can't fix our dud engine. And without the engine, you're never going home"},
+			line = "I mean. Without them, I can't fix our dud engine. And without the engine, you're never going home."},
 			
 			{tag = plrName,
 			line = "THE ENGINE IS BROKEN??? How come I didn't know??"},
@@ -62,7 +62,7 @@ var data = [
 			line = "Comms are down too :)"},
 			
 			{tag = npcName,
-			line = "Find me ANOTHER ITEM!!!! Good luck!"},
+			line = "Good luck finding that wrench! Search as if your life depends on it!! Hah. Hah hah hah.. hah..."},
 		],
 	function = "clearnspawn",
 	param = 1},
@@ -70,19 +70,62 @@ var data = [
 	{dialogue =
 		[
 			{tag = npcName,
-			line = "Thanks, man. That's all for now!"},
+			line = "Thanks, man. I can fix the engine with this!"},
 			
 			{tag = plrName,
-			line = "Alright!"},
+			line = "Alright! Woo!"},
 			
 			{tag = npcName,
-			line = "We'll add more items and things in the future :)"},
+			line = "Now, the hardest part. I have no idea how to drive this dumb space boat."},
+			
+			{tag = plrName,
+			line = "What—"},
 			
 			{tag = npcName,
-			line = "Bye!!!"},
+			line = "SOOOO you will have to find the ship's operating manual!"},
+			
+			{tag = npcName,
+			line = "I might have dropped it outside though..."},
+			
+			{tag = plrName,
+			line = "Outside? Like. Outside?? The one thing that knows how to get this ship back home???"},
+			
+			{tag = npcName,
+			line = "Whoopsie daisies."},
+			
+			{tag = npcName,
+			line = "ANYWAY go find that BYE!!"},
+			
+		],
+	function = "clearnspawn",
+	param = 2},
+	
+	{dialogue =
+		[
+			{tag = npcName,
+			line = "WOO! We can finally go home!"},
+			
+			{tag = plrName,
+			line = "Thank gosh. I can finally see a face other than yours. That'll be a treat."},
+			
+			{tag = npcName,
+			line = "Ow :("},
+			
+			{tag = npcName,
+			line = "Well. Thanks for your help anyway! My loving wife and kids will be thrilled to have me back!"},
+			
+			{tag = plrName,
+			line = "Let's just go home, " + npcName+"."},
+			
+			{tag = npcName,
+			line = "Yep. On it."},
+			
+			{tag = "Thanks for playing!",
+			line = "Developed by Kate Anderson. Assets curated by Luke Cornell. Music design by Sathvik Vemulapalli."}
 			
 		],
 	function = "clear"}
+	
 ]
 
 

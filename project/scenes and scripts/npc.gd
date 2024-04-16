@@ -11,12 +11,17 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 var chatIcon
-
+var plr
 func _ready():
 	chatIcon = $Control/chatIcon
+	plr = $"/root/main/player"
 
 
 func _physics_process(delta):
+	if plr.global_position.x < global_position.x:
+		$Sprite2D.flip_h = true
+	else:
+		$Sprite2D.flip_h = false
 	pass
 	#if direction:
 		#velocity.x = direction * SPEED

@@ -1,37 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://cc1sx5m0unkqk"]
+[gd_scene load_steps=4 format=3 uid="uid://bakqkoure4xto"]
 
-[ext_resource type="Script" path="res://scenes and scripts/item.gd" id="1_hiq0j"]
-[ext_resource type="Texture2D" uid="uid://bap0silmqd3fd" path="res://images/11png.png" id="2_tou23"]
+[ext_resource type="Script" path="res://scenes and scripts/item.gd" id="1_31r4r"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aabhm"]
+load_path = "res://.godot/imported/cake.png-bdd16c3e9cdaada89c236148f76bec21.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fh0wl"]
 size = Vector2(100, 100)
 
 [node name="item" type="CharacterBody2D"]
 z_index = 15
+position = Vector2(751, 346)
 collision_layer = 0
 collision_mask = 0
 motion_mode = 1
-script = ExtResource("1_hiq0j")
+script = ExtResource("1_31r4r")
 
 [node name="texture" type="TextureRect" parent="."]
-modulate = Color(0.976471, 0.168627, 0.168627, 1)
 z_index = 9
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
+offset_left = -56.0
+offset_top = -63.0
+offset_right = 233.0
+offset_bottom = 228.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_tou23")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("CompressedTexture2D_aabhm")
 metadata/id = 0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("RectangleShape2D_fh0wl")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
